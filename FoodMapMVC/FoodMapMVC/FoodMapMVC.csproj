@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\FoodMapManager.cs" />
+    <Compile Include="Models\FoodMapViewModel.cs" />
     <Compile Include="ORM\Account.cs" />
     <Compile Include="ORM\ContextModel.cs" />
     <Compile Include="ORM\MapContent.cs" />
@@ -177,10 +178,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\FoodMapAdmin\Index.cshtml" />
+    <Content Include="Views\FoodMapAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="FileDownload\MapContent\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

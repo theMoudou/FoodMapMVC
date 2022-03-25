@@ -1,4 +1,6 @@
 ﻿using FoodMapMVC.Managers;
+using FoodMapMVC.Models;
+using FoodMapMVC.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,20 +23,36 @@ namespace FoodMapMVC.Controllers
         // GET: FoodMapAdmin/Details/5
         public ActionResult Details(Guid? id)
         {
-            return View();
+            if (id.HasValue)
+            {
+                var model = this._mgr.GetAdminMap(id.Value);
+                return View(model);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: FoodMapAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FoodMapViewModel vModel)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                var model = new MapContent()
+                {
+                    Title = vModel.Title,
+                    Body = vModel.Body,
+                    CoverImage = "/FileDownload/MapContent/R.jpg",
+                    Latitude = vModel.Latitude,
+                    Longitude = vModel.Longitude,
+                    IsEnable = vModel.IsEnable
+                };
+                this._mgr.CreateFoodMap(model);
+                return RedirectToAction("Details", new { id = model.ID });
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -42,13 +60,23 @@ namespace FoodMapMVC.Controllers
 
         // POST: FoodMapAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FoodMapViewModel vModel)
         {
             try
             {
-                // TODO: Add update logic here
+                var model = new MapContent()
+                {
+                    ID = vModel.ID,
+                    Title = vModel.Title,
+                    Body = vModel.Body,
+                    CoverImage = "/FileDownload/MapContent/R.jpg",
+                    Latitude = vModel.Latitude,
+                    Longitude = vModel.Longitude,
+                    IsEnable = vModel.IsEnable
+                };
+                this._mgr.EditFoodMap(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = model.ID });
             }
             catch
             {
