@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FoodMapMVC.ORM.MapContent>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>美食地圖清單</h2>
+<p>
+    @Html.ActionLink("建立資料", "Details")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsEnable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>管理</th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsEnable)
+        </td>
+        <td>
+            @item.CreateDate.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Details", new { id=item.ID }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+</table>
