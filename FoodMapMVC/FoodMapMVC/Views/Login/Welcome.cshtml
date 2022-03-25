@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Welcome";
+
+    
+}
+<h2>Welcome</h2>
+
+<form action="@Url.Action("Logout", "Login")" method="post">
+    嗨，親愛的 @User.Identity.Name 你好。
+    <br />
+    現在時間是 @DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+
+    <button type="submit">登出</button>
+</form>

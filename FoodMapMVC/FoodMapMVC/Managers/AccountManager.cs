@@ -19,6 +19,17 @@ namespace FoodMapMVC.Managers
             }
         }
 
+        public Account GetAccount(string account)
+        {
+            using (ContextModel contextModel = new ContextModel())
+            {
+                var query = contextModel.Accounts.Where(item => item.Account1 == account);
+
+                var obj = query.FirstOrDefault();
+                return obj;
+            }
+        }
+
         public Account GetAccount(Guid id)
         {
             using (ContextModel contextModel = new ContextModel())

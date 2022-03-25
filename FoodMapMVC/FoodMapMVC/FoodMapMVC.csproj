@@ -130,9 +130,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FoodMapAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\FoodMapManager.cs" />
     <Compile Include="Models\FoodMapViewModel.cs" />
@@ -179,6 +181,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\FoodMapAdmin\Index.cshtml" />
     <Content Include="Views\FoodMapAdmin\Details.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
