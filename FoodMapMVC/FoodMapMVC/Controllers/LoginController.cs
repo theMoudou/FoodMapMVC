@@ -9,15 +9,19 @@ using System.Web.Security;
 
 namespace FoodMapMVC.Controllers
 {
+    [Authorize]
     public class LoginController : Controller
     {
         private AccountManager _mgr = new AccountManager();
+        
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
@@ -45,12 +49,8 @@ namespace FoodMapMVC.Controllers
             LoginHelper.Logout();
             return View("Index");
         }  
-
         public ActionResult Welcome()
         {
-            if(!LoginHelper.IsLogined())
-                return RedirectToAction("Index", "Login");
-
             return View();
         }
     }

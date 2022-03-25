@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace FoodMapMVC.Controllers
 {
+    [Authorize]
     public class FoodMapAdminController : Controller
     {
         private FoodMapManager _mgr = new FoodMapManager();
