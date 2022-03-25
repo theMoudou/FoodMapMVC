@@ -4,7 +4,7 @@
 }
 <h2>美食地圖清單</h2>
 <p>
-    @Html.ActionLink("建立資料", "Details")
+    <a href="@Url.Action("Details")" class="btn btn-info">建立資料</a>
 </p>
 <table class="table">
     <tr>
@@ -25,27 +25,46 @@
         </th>
         <th>管理</th>
     </tr>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsEnable)
-        </td>
-        <td>
-            @item.CreateDate.ToString("yyyy-MM-dd")
-        </td>
-        <td>
-            @Html.ActionLink("編輯", "Details", new { id=item.ID }) |
-            @Html.ActionLink("刪除", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    var titleText =
+                        (item.Title.Length > 50)
+                            ? item.Title.Substring(0, 50)
+                            : item.Title;
+                }
+                @Html.ActionLink(titleText, "Details", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEnable)
+            </td>
+            <td>
+                @item.CreateDate.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                <form method="post" action="@Url.Action("Delete", "FoodMapAdmin")">
+                    <input type="hidden" name="ID" value="@item.ID" />
+                    <button type="submit" class="btn btn-danger" name="DeleteButton"
+                            onclick="return confirm('確定刪除嗎?')">
+                        刪除
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
 </table>
+
+@if (this.TempData["AlertMsg"] != null)
+{
+    <script>
+        alert('@this.TempData["AlertMsg"]');
+    </script>
+}

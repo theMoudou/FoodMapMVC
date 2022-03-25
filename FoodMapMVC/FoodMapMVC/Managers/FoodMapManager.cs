@@ -87,6 +87,22 @@ namespace FoodMapMVC.Managers
                 contextModel.SaveChanges();
             }
         }
+        public void DeleteFoodMap(Guid id)
+        {
+            using (ContextModel contextModel = new ContextModel())
+            {
+                var entity =
+                     (from item in contextModel.MapContents
+                      where item.ID == id
+                      select item).FirstOrDefault();
+                if (entity != null)
+                {
+                    contextModel.MapContents.Remove(entity);
+                    contextModel.SaveChanges();
+                }
+            }
+        }
+
 
         private static void ValidateModelColumns(MapContent model)
         {

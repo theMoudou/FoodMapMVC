@@ -30,7 +30,12 @@ namespace FoodMapMVC.Controllers
             }
             else
             {
-                return View();
+                MapContent model = new MapContent()
+                {
+                    Longitude = 23.5,
+                    Latitude = 123.8
+                };
+                return View(model);
             }
         }
 
@@ -86,13 +91,15 @@ namespace FoodMapMVC.Controllers
 
         // POST: FoodMapAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id)
         {
             try
             {
-                // TODO: Add delete logic here
+                this._mgr.DeleteFoodMap(id);
+                this.TempData["AlertMsg"] = "刪除成功";
 
-                return RedirectToAction("Index");
+                var list = this._mgr.GetAdminMapList();
+                return View("Index", list);
             }
             catch
             {
